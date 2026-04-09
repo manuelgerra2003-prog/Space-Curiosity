@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Space-Curiosity</title>
+</head>
+<body>
+
+    <div class="stars" id="stars"></div>
+
+    <header>
+        <div class="logo">
+            <img src="Logo.png" alt="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="ativo">Home</a></li>
+                <li><a href="#">Astros</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <div class="list">
+
+            <div class="item ativo" data-index="0">
+                <div class="imagem-planeta">
+                    <img src="Saturno-removebg-preview.png" alt="Saturno">
+                </div>
+                <div class="conteudo-planeta">
+                    <span class="subtitulo">Gigante Gasoso · 6º Planeta</span>
+                    <h2>Saturno</h2>
+                    <p class="descricao">
+                        Saturno é o sexto planeta a partir do Sol e o segundo maior do Sistema Solar,
+                        conhecido principalmente por seu espetacular sistema de anéis. É um gigante
+                        gasoso, composto majoritariamente por hidrogênio e hélio, sem uma superfície
+                        sólida definida.
+                    </p>
+                    <div class="dados">
+                        <div class="dado">
+                            <span class="dado-label">Distância</span>
+                            <span class="dado-valor">1,4 bi km</span>
+                        </div>
+                        <div class="dado">
+                            <span class="dado-label">Luas</span>
+                            <span class="dado-valor">146</span>
+                        </div>
+                        <div class="dado">
+                            <span class="dado-label">Período</span>
+                            <span class="dado-valor">29 anos</span>
+                        </div>
+                    </div>
+                    <button class="btn-saiba-mais">Saiba Mais</button>
+                </div>
+            </div>
+
+            <div class="item" data-index="1">
+                <div class="imagem-planeta">
+                    <img src="Jupiter.png" alt="Júpiter">
+                </div>
+                <div class="conteudo-planeta">
+                    <span class="subtitulo">Gigante Gasoso · 5º Planeta</span>
+                    <h2>Júpiter</h2>
+                    <p class="descricao">
+                        Júpiter é o maior planeta do Sistema Solar, tão volumoso que caberia mais
+                        de mil Terras dentro dele. Sua Grande Mancha Vermelha é uma tempestade
+                        que dura há mais de 350 anos.
+                    </p>
+                    <div class="dados">
+                        <div class="dado">
+                            <span class="dado-label">Distância</span>
+                            <span class="dado-valor">778 M km</span>
+                        </div>
+                        <div class="dado">
+                            <span class="dado-label">Luas</span>
+                            <span class="dado-valor">95</span>
+                        </div>
+                        <div class="dado">
+                            <span class="dado-label">Período</span>
+                            <span class="dado-valor">12 anos</span>
+                        </div>
+                    </div>
+                    <button class="btn-saiba-mais">Saiba Mais</button>
+                </div>
+            </div>
+
+            <div class="item" data-index="2">
+                <div class="imagem-planeta">
+                    <img src="Marte.png" alt="Marte">
+                </div>
+                <div class="conteudo-planeta">
+                    <span class="subtitulo">Planeta Rochoso · 4º Planeta</span>
+                    <h2>Marte</h2>
+                    <p class="descricao">
+                        Chamado de Planeta Vermelho por sua superfície avermelhada rica em óxido
+                        de ferro, Marte abriga o Monte Olimpo — o vulcão mais alto do sistema solar,
+                        com 21 km de altitude.
+                    </p>
+                    <div class="dados">
+                        <div class="dado">
+                            <span class="dado-label">Distância</span>
+                            <span class="dado-valor">227 M km</span>
+                        </div>
+                        <div class="dado">
+                            <span class="dado-label">Luas</span>
+                            <span class="dado-valor">2</span>
+                        </div>
+                        <div class="dado">
+                            <span class="dado-label">Período</span>
+                            <span class="dado-valor">687 dias</span>
+                        </div>
+                    </div>
+                    <button class="btn-saiba-mais">Saiba Mais</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="setas">
+            <button class="seta seta-esq" id="seta-esq" aria-label="Anterior">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="seta seta-dir" id="seta-dir" aria-label="Próximo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+
+        <div class="indicadores">
+            <button class="indicador ativo" data-alvo="0"></button>
+            <button class="indicador" data-alvo="1"></button>
+            <button class="indicador" data-alvo="2"></button>
+        </div>
+
+    </section>
+
+    <script>
+        const starsEl = document.getElementById('stars');
+        for (let i = 0; i < 120; i++) {
+            const s = document.createElement('span');
+            s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;opacity:${Math.random()*0.7+0.2};animation-delay:${Math.random()*0}s;`;
+            starsEl.appendChild(s);
+        }
+
+        const itens = document.querySelectorAll('.item');
+        const indicadores = document.querySelectorAll('.indicador');
+        let atual = 0;
+
+        function irPara(idx) {
+            itens[atual].classList.remove('ativo');
+            indicadores[atual].classList.remove('ativo');
+            atual = (idx + itens.length) % itens.length;
+            itens[atual].classList.add('ativo');
+            indicadores[atual].classList.add('ativo');
+        }
+
+        document.getElementById('seta-dir').addEventListener('click', () => irPara(atual + 1));
+        document.getElementById('seta-esq').addEventListener('click', () => irPara(atual - 1));
+        indicadores.forEach(btn => btn.addEventListener('click', () => irPara(+btn.dataset.alvo)));
+    </script>
+
+</body>
+</html>
